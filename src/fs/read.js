@@ -2,7 +2,6 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const read = async () => {
-  // read.js - implement function that prints content of the fileToRead.txt into console (if there's no file fileToRead.txt Error with message FS operation failed must be thrown)
   const filename = 'fileToRead.txt';
   const pathToRead = path.resolve('src', 'fs', 'files', filename);
 

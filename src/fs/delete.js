@@ -2,7 +2,6 @@ import { rm } from 'node:fs/promises';
 import path from 'node:path';
 
 const remove = async () => {
-  // delete.js - implement function that deletes file fileToRemove.txt (if there's no file fileToRemove.txt Error with message FS operation failed must be thrown)
   const filename = 'fileToRemove.txt';
   const pathToRemove = path.resolve('src', 'fs', 'files', filename);
 

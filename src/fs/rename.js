@@ -2,7 +2,6 @@ import { rename as fsRename } from 'node:fs/promises';
 import path from 'node:path';
 
 const rename = async () => {
-  // rename.js - implement function that renames file wrongFilename.txt to properFilename with extension .md (if there's no file wrongFilename.txt or properFilename.md already exists Error with message FS operation failed must be thrown)
   const oldFilename = 'wrongFilename.txt';
   const newFilename = 'properFilename.md';
   const commonPath = path.resolve('src', 'fs', 'files');

@@ -2,7 +2,6 @@ import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
 const list = async () => {
-  // list.js - implement function that prints array of all filenames from files folder into console (if files folder doesn't exists Error with message FS operation failed must be thrown)
   const pathToRead = path.resolve('src', 'fs', 'files');
 
   try {
