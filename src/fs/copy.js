@@ -1,9 +1,12 @@
 import { cp } from 'node:fs/promises';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const copy = async () => {
-  const sourcePath = path.resolve('src', 'fs', 'files');
-  const destinationPath = path.resolve('src', 'fs', 'files_copy');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const sourcePath = resolve(__dirname, 'files');
+  const destinationPath = resolve(__dirname, 'files_copy');
 
   try {
     await cp(sourcePath, destinationPath, {

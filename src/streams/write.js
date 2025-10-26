@@ -1,8 +1,11 @@
 import { createWriteStream } from 'node:fs';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const write = async () => {
-  const filePath = path.resolve('src', 'streams', 'files', 'fileToWrite.txt');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const filePath = resolve(__dirname, 'files', 'fileToWrite.txt');
   process.stdin.pipe(createWriteStream(filePath));
 };
 

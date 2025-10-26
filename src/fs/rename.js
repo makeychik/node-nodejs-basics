@@ -1,12 +1,15 @@
 import { rename as fsRename } from 'node:fs/promises';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const rename = async () => {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
   const oldFilename = 'wrongFilename.txt';
   const newFilename = 'properFilename.md';
-  const commonPath = path.resolve('src', 'fs', 'files');
-  const oldPath = path.resolve(commonPath, oldFilename);
-  const newPath = path.resolve(commonPath, newFilename);
+  const commonPath = resolve(__dirname, 'files');
+  const oldPath = resolve(commonPath, oldFilename);
+  const newPath = resolve(commonPath, newFilename);
 
   try {
     await fsRename(oldPath, newPath);

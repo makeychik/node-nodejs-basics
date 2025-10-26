@@ -1,10 +1,12 @@
 import { writeFile } from 'node:fs/promises';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const create = async () => {
-  //create.js - implement function that creates new file fresh.txt with content I am fresh and young inside of the files folder (if file already exists Error with message FS operation failed must be thrown)
-  const fileName = 'fresh.txt';
-  const filePath = path.resolve('src', 'fs', 'files', fileName);
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const fileToCreateName = 'fresh.txt';
+  const filePath = resolve(__dirname, 'files', fileToCreateName);
   const content = 'I am fresh and young';
 
   try {

@@ -1,8 +1,11 @@
 import { spawn } from 'node:child_process';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const spawnChildProcess = async (args) => {
-  const scriptPath = path.resolve('src', 'cp', 'files', 'script.js');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const scriptPath = resolve(__dirname, 'files', 'script.js');
   const child = spawn('node', [scriptPath, ...args], {
     stdio: ['pipe', 'pipe', 'pipe'],
   });

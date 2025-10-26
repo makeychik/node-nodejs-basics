@@ -1,9 +1,12 @@
 import { once } from 'node:events';
 import { createReadStream } from 'node:fs';
-import path from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const read = async () => {
-  const filePath = path.resolve('src', 'streams', 'files', 'fileToRead.txt');
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  const filePath = resolve(__dirname, 'files', 'fileToRead.txt');
   const readStream = createReadStream(filePath);
   readStream.pipe(process.stdout, {
     end: false,
