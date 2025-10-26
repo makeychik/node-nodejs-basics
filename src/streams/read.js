@@ -1,6 +1,7 @@
-import { once } from 'node:events';
 import { createReadStream } from 'node:fs';
+import { EOL } from 'node:os';
 import { dirname, resolve } from 'node:path';
+import { finished } from 'node:stream/promises';
 import { fileURLToPath } from 'node:url';
 
 const read = async () => {
@@ -11,8 +12,8 @@ const read = async () => {
   readStream.pipe(process.stdout, {
     end: false,
   });
-  await once(readStream, 'end');
-  process.stdout.write('\n');
+  await finished(readStream);
+  process.stdout.write(`${EOL}`);
 };
 
 await read();

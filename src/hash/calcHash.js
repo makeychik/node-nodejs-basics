@@ -1,6 +1,8 @@
 import crypto from 'node:crypto';
 import { createReadStream } from 'node:fs';
+import { EOL } from 'node:os';
 import { dirname, resolve } from 'node:path';
+import { finished, pipeline } from 'node:stream/promises';
 import { fileURLToPath } from 'node:url';
 
 const calculateHash = async () => {
@@ -11,9 +13,11 @@ const calculateHash = async () => {
   const hash = crypto.createHash('sha256');
   hash.setEncoding('hex');
 
-  createReadStream(filePath)
-    .pipe(hash)
-    .on('finish', () => console.log(hash.read()));
+  await pipeline(createReadStream(filePath), hash);
+
+  hash.pipe(process.stdout, { end: false });
+  await finished(hash);
+  process.stdout.write(`${EOL}`);
 };
 
 await calculateHash();
